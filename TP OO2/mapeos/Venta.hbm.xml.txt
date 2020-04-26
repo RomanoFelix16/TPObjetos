@@ -1,0 +1,34 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="siststock.Venta" table="venta">
+		<id column="idVenta" name="idVenta">
+			<generator class="identity" />
+		</id>
+		<property column="fechaActual" name="fechaActual"
+			type="LocalDate" />
+		<property column="listaDetalleVenta" name="listaDetalleVenta"
+			type="List" />
+
+		<set name="local" table="local" order-by="id asc" inverse="true"
+			lazy="true" fetch="select">
+			<key column="id" not-null="true" />
+			<one-to-many class="siststock.Local" />
+		</set>
+
+		<set name="cliente" table="cliente" order-by="email asc"
+			inverse="true" lazy="true" fetch="select">
+			<key column="email" not-null="true" />
+			<one-to-many class="siststock.Cliente" />
+		</set>
+
+		<set name="empleado" table="empleado" order-by="id asc"
+			inverse="true" lazy="true" fetch="select">
+			<key column="id" not-null="true" />
+			<one-to-many class="siststock.Empleado" />
+		</set>
+
+	</class>
+</hibernate-mapping>
